@@ -3,9 +3,10 @@ const { Configuration, OpenAIApi } = require("openai");
 const options = require("./../config");
 
 const configuration = new Configuration({
-  apiKey: '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',
+  apiKey: process.env.API_KEY,
 });
 
+let key = process.env.API_KEY;
 exports.openai = async (req, res) => {
   try {
     let input = req.body.messages,
@@ -38,7 +39,7 @@ exports.openai = async (req, res) => {
       headers: {
         "Content-Type": "application/json",
         Authorization:
-          "Bearer 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",
+          `Bearer ${key}`,
       },
       data: data,
     };
