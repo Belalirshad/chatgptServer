@@ -3,7 +3,7 @@ const { Configuration, OpenAIApi } = require("openai");
 const options = require("./../config");
 
 const configuration = new Configuration({
-  apiKey: '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',
+  apiKey: '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',
 });
 
 exports.openai = async (req, res) => {
@@ -38,11 +38,12 @@ exports.openai = async (req, res) => {
       headers: {
         "Content-Type": "application/json",
         Authorization:
-          "Bearer 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",
+          "Bearer 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",
       },
       data: data,
     };
 
+    // console.log("======>", apiKey);
     let result = [];
 
     axios
