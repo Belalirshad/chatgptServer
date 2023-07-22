@@ -3,7 +3,7 @@ const { Configuration, OpenAIApi } = require("openai");
 const options = require("./../config");
 
 const configuration = new Configuration({
-  apiKey: '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',
+  apiKey: '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',
 });
 
 exports.openai = async (req, res) => {
@@ -38,7 +38,7 @@ exports.openai = async (req, res) => {
       headers: {
         "Content-Type": "application/json",
         Authorization:
-          "Bearer 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",
+          "Bearer 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",
       },
       data: data,
     };
