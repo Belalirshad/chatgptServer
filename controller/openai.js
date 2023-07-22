@@ -20,7 +20,6 @@ exports.openai = async (req, res) => {
       input = options[index -1]['brief'] + " " + input.toLowerCase();
     }
 
-    console.log("=========>", JSON.stringify(input))
     // return;
     let data = JSON.stringify({
       model: "gpt-3.5-turbo",
@@ -39,7 +38,7 @@ exports.openai = async (req, res) => {
       headers: {
         "Content-Type": "application/json",
         Authorization:
-          "Bearer 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",
+          "Bearer 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",
       },
       data: data,
     };
@@ -66,9 +65,26 @@ exports.openai = async (req, res) => {
         });
       })
       .catch((error) => {
-        console.log(error);
+           // Handle API error response
+    if (error.response) {
+      if (error.response.status === 401) {
+        // Handle 401 Unauthorized Error
+        if (error.response.data && error.response.data.error) {
+          res.status(401).send({ message: error.response.data.error });
+        } else {
+          res.status(401).send({ message: "Unauthorized: Please check your API credentials." });
+        }
+      } else {
+        // Handle other errors with status code and data from API
+        res.status(error.response.status).send({ message: error.response.data });
+      }
+    } else {
+      // Handle other errors (network, client, etc.)
+      res.status(500).send({ message: "Something went wrong. Please try again later." });
+    }
       });
   } catch (err) {
+    console.log(err)
     return res.status(500).send({ status: 500, message: err.message });
   }
 };
